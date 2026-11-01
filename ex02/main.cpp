@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 20:21:29 by mshershe          #+#    #+#             */
-/*   Updated: 2026/11/01 20:10:48 by mshershe         ###   ########.fr       */
+/*   Updated: 2026/11/01 20:11:56 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,11 +157,6 @@ int main (int argc, char *argv[])
 ?	- Disadvantages:
 ?		Not necessarily the fastest in practic
 ?		Requires additional memory and bookkeeping
-?
-?
-?
-?
-?	
 ?	fordJohnson()
 ?	    |-- 1. Form pairs
 ?	    |-- 2. Recursively sort pairs by their larger elements
