@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 20:18:00 by mshershe          #+#    #+#             */
-/*   Updated: 2026/10/29 20:36:34 by mshershe         ###   ########.fr       */
+/*   Updated: 2026/11/02 17:55:34 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ BitcoinExchange::BitcoinExchange(const std::string& database, const std::string&
 }
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
 {
-	this->Record = other.Record; 
+	this->Record = other.Record;
 }
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 {
 	if (this != &other)
 	{
-		this->Record = other.Record; 
+		this->Record = other.Record;
 	}
 	return (*this);
 }
 BitcoinExchange::~BitcoinExchange()
 {
-	
+
 }
 
 void BitcoinExchange::load_database(const std::string& filename)
@@ -49,13 +49,13 @@ void BitcoinExchange::load_database(const std::string& filename)
 	char extra;
 
 	if (!stream.is_open())
-		throw std::runtime_error("Could not open database file");
+		throw std::runtime_error("Error: Could not open database file");
 
 	if (!std::getline(stream , line))
-		throw std::runtime_error("The database is empty"); 
+		throw std::runtime_error("Error: The database is empty");
 	if (header_validation(line, "date,exchange_rate"))
-		throw std::runtime_error("Malformed database header"); 
-	
+		throw std::runtime_error("Error: Malformed database header");
+
 	while (std::getline(stream , line))
 	{
 		comma_pos = line.find(',');
@@ -77,7 +77,7 @@ void BitcoinExchange::load_database(const std::string& filename)
 			std::cout << "Warning: malformed database row (missing comma): "<< line << std::endl;//no comma is found in the line
 	}
 	if (Record.empty())
-		throw std::runtime_error("Empty valid database");
+		throw std::runtime_error("Error: Empty valid database");
 }
 
 
@@ -101,7 +101,7 @@ double BitcoinExchange::rate_lookup(const std::string& key_date)
 			std::cout << "No exchange rate is available for the date given nor before "<< std::endl;
 			return -1;
 		}
-	}	
+	}
 }
 
 
@@ -113,13 +113,13 @@ void BitcoinExchange::load_input_file(const std::string& filename)
 	char extra;
 
 	if (!stream.is_open())
-		throw std::runtime_error("Could not open the input file");
+		throw std::runtime_error("Error: Could not open the input file");
 
 	if (!std::getline(stream , line))
-		throw std::runtime_error("The input file is empty"); 
+		throw std::runtime_error("Error: The input file is empty");
 	if (header_validation(line, "date | value"))
-		throw std::runtime_error("Malformed input file header"); 
-	
+		throw std::runtime_error("Error: Malformed input file header");
+
 	while (std::getline(stream , line))
 	{
 		sep_pos = line.find('|');
@@ -127,7 +127,7 @@ void BitcoinExchange::load_input_file(const std::string& filename)
 		{
 			std::string date = trim(line.substr(0, sep_pos));
 			std::string amount_str =  trim(line.substr(sep_pos + 1));
-			std::istringstream strm(amount_str); 
+			std::istringstream strm(amount_str);
 			double amount;
 
 			if (!(strm >> amount))
@@ -168,7 +168,7 @@ int date_validation(const std::string& date)
 		month_str.find_first_not_of("0123456789") != std::string::npos ||
 		day_str.find_first_not_of("0123456789") != std::string::npos)
 		return 1;
-	
+
 	int year = std::atoi(year_str.c_str());
 	int month = std::atoi(month_str.c_str());
 	int day = std::atoi(day_str.c_str());
@@ -203,7 +203,7 @@ int amount_validation(double amount)
 	}
 	else
 		return 0;
-	
+
 }
 
 int exchange_rate_validation(double rate)
@@ -233,7 +233,7 @@ std::string trim(const std::string& str)
 
     if (first == std::string::npos)
         return "";
-		
+
     std::string::size_type last = str.find_last_not_of(" \t\r\n");
     return str.substr(first, last - first + 1);
 }

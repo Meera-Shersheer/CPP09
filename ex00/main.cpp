@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 20:21:06 by mshershe          #+#    #+#             */
-/*   Updated: 2026/10/29 20:33:41 by mshershe         ###   ########.fr       */
+/*   Updated: 2026/11/02 17:51:48 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,16 @@ int main (int argc, char *argv[])
 		std::cout<< "Error: could not open file."<< std::endl;
 	else
 	{
-		BitcoinExchange Recordbook("data.csv", argv[1]);
+		try
+		{
+			BitcoinExchange Recordbook("data.csv", argv[1]);
+
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+
 	}
 	return (0);
 }
